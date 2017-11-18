@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="false" 
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/data/jpa 
+		http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+		http://cxf.apache.org/jaxws 
+    	http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!-- 通知(配置事务控制特性） -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes> 
+			<!--支持只读事务 -->
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="search*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="pre*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="index*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="count*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="show*" propagation="SUPPORTS" read-only="true" />
+			<!--对其他方法支持事务 -->
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 控制器切入点(配置事务支持) -->
+	<aop:config>
+		<aop:advisor
+		    pointcut="@within(org.springframework.web.bind.annotation.RestController)"
+			advice-ref="txAdvice" />
+	</aop:config>
+	
+	<!-- 服务切入点(配置事务支持) -->
+	<aop:config>
+		<aop:advisor
+		    pointcut="@within(org.springframework.stereotype.Service))"
+			advice-ref="txAdvice" />
+	</aop:config>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+app:
+    companyName: 淘劵猪
+spring:
+    h2.console:
+        enabled: true
+        settings.web-allow-others: true
+    datasource:
+        driverClassName: org.h2.Driver
+        url: jdbc:h2:tcp://localhost:9092/${user.dir}/tjz-service/src/test/resources/akkb;MODE=MYSQL
+        #url: jdbc:h2:mem:akkb;MODE=MYSQL
+        username: test
+        password: test
+        initialize: false
+    jpa:
+        properties:
+            hibernate:
+                hbm2ddl.auto: update
+                show_sql: true
+                format_sql: true
+    devtools.restart.enabled: false
+server:
+    port: 80
+    context-path: /tjz
+security:
+    basic:
+        enabled: true
+        realm: ${server.context-path}
+        path: /action/adm/**
+    user:
+        name: admin
+        password: 123456
+        
+
+
+
