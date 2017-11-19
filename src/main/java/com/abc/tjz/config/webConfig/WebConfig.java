@@ -14,9 +14,11 @@ import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -50,8 +52,8 @@ public class WebConfig {
 	 * DateConverter
 	 */
 	@Bean
-	DateConverter dateConverter$custom() {
-		return new DateConverter();
+	LocalDateTimeConverter localDateTimeConverter$custom() {
+		return new LocalDateTimeConverter();
 	}
 	
 	/**
@@ -68,6 +70,19 @@ public class WebConfig {
 	@Bean
 	ServletContextInitializer servletContextInitializer$bean() {
 		return new DefaultServletContextInitializer();
+	}
+
+	/**
+	 * Init filter
+	 */
+	@Bean
+	FilterRegistrationBean initFilter$custom() {
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.addUrlPatterns("/action/*");
+		registration.setName("action-filter$custom");
+		registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		registration.setFilter(new ActionFilter());
+		return registration;
 	}
 }
 

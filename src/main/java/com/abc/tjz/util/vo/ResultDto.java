@@ -20,7 +20,7 @@ public class ResultDto<T> {
     }
 
     public static <T> ResultDto<T> fail(String msg) {
-        return fail(msg);
+        return fail(msg, null);
     }
 
     public static <T> ResultDto<T> fail(String msg, T data) {

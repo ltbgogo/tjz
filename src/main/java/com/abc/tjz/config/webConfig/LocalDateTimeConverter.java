@@ -1,5 +1,7 @@
 package com.abc.tjz.config.webConfig;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import lombok.SneakyThrows;
@@ -11,15 +13,16 @@ import org.springframework.core.convert.converter.Converter;
 /**
  * 日期转换器
  */
-class DateConverter implements Converter<String, Date> {
+class LocalDateTimeConverter implements Converter<String, LocalDateTime> {
 
 	@SneakyThrows
 	@Override
-	public Date convert(String source) {
+	public LocalDateTime convert(String source) {
 		if (StringUtils.isBlank(source)) {
 			return null;
 		} else {
-			return DateUtils.parseDate(source, "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm");
+			return LocalDateTime.parse("2017-11-11 11:11:22", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		}
 	}
+
 }

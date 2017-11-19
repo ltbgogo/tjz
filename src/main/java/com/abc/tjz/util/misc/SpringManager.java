@@ -1,4 +1,4 @@
-package com.abc.tjz.util;
+package com.abc.tjz.util.misc;
 
 import javax.persistence.EntityManagerFactory;
 

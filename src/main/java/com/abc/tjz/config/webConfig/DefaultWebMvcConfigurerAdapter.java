@@ -1,6 +1,8 @@
 package com.abc.tjz.config.webConfig;
 
+import com.abc.tjz.config.commonConfig.App;
 import com.abc.tjz.util.json.JpaLazyIntrospector;
+import com.abc.tjz.util.json.LocalDateTimeSerializer;
 import com.abc.tjz.util.json.TextEnumSerializer;
 import com.abc.tjz.util.spec.TextEnum;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +30,7 @@ public class DefaultWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		//配置快捷方式
-		registry.addRedirectViewController("/", "/action/cardPack/showIndex").setKeepQueryParams(true);
+		registry.addRedirectViewController("/", "/action/quantb/showIndex").setKeepQueryParams(true);
 	}
 	
 	/**
@@ -36,6 +39,7 @@ public class DefaultWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     	registry.addResourceHandler("/static/page/**").addResourceLocations("classpath:templates/");
+		registry.addResourceHandler("/static/dynamic/**").addResourceLocations(App.INSTANCE.getDynamicResLocation());
     }
 
 	/**
@@ -48,6 +52,7 @@ public class DefaultWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
         simpleModule.addSerializer(Date.class, new DateSerializer(false, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")));
         simpleModule.addSerializer(TextEnum.class, new TextEnumSerializer());
+        simpleModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(simpleModule);
