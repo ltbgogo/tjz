@@ -21,12 +21,11 @@
     <meta name="x5-fullscreen" content="true">
     <meta name="x5-page-mode" content="app">
     <title>${pageTitle!'淘劵猪'}</title>
-    <title>${pageTitle!'爱卡卡包'}</title>
+    <link rel="icon" href="//img.alicdn.com/tps/i3/T1OjaVFl4dXXa.JOZB-114-114.png" type="image/x-icon" />
     <link rel="stylesheet" href="//cdn.bootcss.com/normalize/7.0.0/normalize.min.css">
     <link rel="stylesheet" href="${app.publicResPath}/css/common.css">
-    <link rel="stylesheet" href="//apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript"  src="//cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
     <script type="text/javascript">
         var actionPath="${app.actionPath}";
     </script>

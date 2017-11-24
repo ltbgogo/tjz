@@ -27,7 +27,23 @@
     </a>
 </div>
 
-
+<!-- 券列表 -->
+<div id="id_coupon_list">
+    <div v-for="conpon in coupons" class="cls_coupon">
+        <div class="cls_image_area">
+            <img v-bind:src="'${app.dynamicResPath}/' + conpon.imagePath">
+        </div>
+        <div class="cls_info_area">
+            <div class="cls_info_title">{{conpon.title}}</div>
+            <div class="cls_info_oldPrice">淘宝价 &yen;{{conpon.oldPrice / 100}}</div>
+            <div class="cls_info_bottom">
+                <mark class="cls_label_buyPrice">券后价</mark>
+                <span class="cls_buyPrice">&yen;{{conpon.buyPrice / 100}}</span>
+                <mark class="cls_label_couponPrice">{{conpon.couponPrice / 100}}元券</mark>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="${app.pageResPath}/index.js"></script>

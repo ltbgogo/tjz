@@ -1,6 +1,6 @@
 package com.abc.tjz.repository;
 
-import com.abc.tjz.entity.QuanTb;
+import com.abc.tjz.entity.CouponTb;
 import com.abc.tjz.util.misc.SpringManager;
 
 import java.lang.reflect.InvocationHandler;
@@ -13,7 +13,7 @@ import java.lang.reflect.Proxy;
 public interface RepoFactory {
 
 	QuickEntryRepository getQuickEntryRepo();
-	QuanTbRepository getQuanTbRepo();
+	CouponTbRepository getCouponTbRepo();
 	
 	RepoFactory rf = (RepoFactory) Proxy.newProxyInstance(RepoFactory.class.getClassLoader(), new Class[] {RepoFactory.class}, new InvocationHandler() {
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

@@ -30,7 +30,7 @@ public class DefaultWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		//配置快捷方式
-		registry.addRedirectViewController("/", "/action/quantb/showIndex").setKeepQueryParams(true);
+		registry.addRedirectViewController("/", "/action/coupontb/showIndex").setKeepQueryParams(true);
 	}
 	
 	/**

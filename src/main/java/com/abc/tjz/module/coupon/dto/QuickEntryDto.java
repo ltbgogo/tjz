@@ -1,4 +1,4 @@
-package com.abc.tjz.module.quan.dto;
+package com.abc.tjz.module.coupon.dto;
 
 /**
  * @author LiuTongbin

@@ -1,5 +1,6 @@
 package com.abc.tjz.entity;
 
+import com.abc.tjz.util.db.entity.IdDateEntity;
 import com.abc.tjz.util.db.entity.IdEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,9 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "t_quan_tb")
+@Table(name = "t_coupon_tb")
 @Entity
-public class QuanTb extends IdEntity {
+public class CouponTb extends IdDateEntity {
 
     /**
      * 图片路径
@@ -30,12 +31,24 @@ public class QuanTb extends IdEntity {
      */
     @Column(length = 1000)
     private String title;
+    /**
+     * 原始价格
+     */
     @Column(name = "old_price")
     private Integer oldPrice;
-    @Column(name = "quan_price")
-    private Integer quanPrice;
+    /**
+     * 券价格
+     */
+    @Column(name = "coupon_price")
+    private Integer couponPrice;
+    /**
+     * 券后价格
+     */
     @Column(name = "buy_price")
     private Integer buyPrice;
+    /**
+     * 商品链接
+     */
     @Column(length = 1000)
     private String link;
 }
