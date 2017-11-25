@@ -2,34 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="829189d2-5ff8-4d5e-b24d-a373214c8e07" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/entity/Category.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/module/coupon/dto/CouponTbCondiDto.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/repository/CategoryRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/common.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/coupontb/detail.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/coupontb/detail.ftl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/coupontb/detail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/coupontb/list.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/coupontb/list.ftl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/coupontb/list.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/CouponTbAllFetcher.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/CoupontbImageFetcher.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/DbImporter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/Test.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/entity/QuickEntry.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/module/coupon/dto/QuickEntryDto.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/repository/QuickEntryRepository.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/entity/CouponTb.java" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/entity/CouponTb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/module/coupon/controller/TbController.java" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/module/coupon/controller/TbController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/repository/CouponTbRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/repository/CouponTbRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/repository/RepoFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/repository/RepoFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/coupontb/index.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/coupontb/index.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/coupontb/index.js" afterPath="$PROJECT_DIR$/src/main/resources/templates/coupontb/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/inc/_footer.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/inc/_footer.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/CouponTbFetcher.java" afterPath="$PROJECT_DIR$/src/test/java/com/CouponTbFetcher.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/util/vo/CondiVO.java" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/util/dto/CondiDto.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/abc/tjz/util/vo/ResultDto.java" afterPath="$PROJECT_DIR$/src/main/java/com/abc/tjz/util/dto/ResultDto.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -634,7 +607,7 @@
       <workItem from="1511085044282" duration="14301000" />
       <workItem from="1511364503093" duration="3662000" />
       <workItem from="1511450247327" duration="5241000" />
-      <workItem from="1511529499680" duration="45883000" />
+      <workItem from="1511529499680" duration="45906000" />
     </task>
     <task id="LOCAL-00001" summary="xxx">
       <created>1511107222964</created>
@@ -650,11 +623,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511542568272</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="xxx">
+      <created>1511624589343</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1511624589343</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105009000" />
+    <option name="totallyTimeSpent" value="105032000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1374" height="748" extended-state="6" />
