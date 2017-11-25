@@ -1,14 +1,12 @@
 package com.abc.tjz.entity;
 
 import com.abc.tjz.util.db.entity.IdDateEntity;
-import com.abc.tjz.util.db.entity.IdEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author LiuTongbin
@@ -27,10 +25,10 @@ public class CouponTb extends IdDateEntity {
     @Column(name = "image_path", length = 1000)
     private String imagePath;
     /**
-     * 标题
+     * 商品名称
      */
-    @Column(length = 1000)
-    private String title;
+    @Column(length = 1000, name = "goods_name")
+    private String goodsName;
     /**
      * 原始价格
      */
@@ -51,4 +49,16 @@ public class CouponTb extends IdDateEntity {
      */
     @Column(length = 1000)
     private String link;
+    /**
+     * 购买人数
+     */
+    @Column(name = "buyer_count")
+    @ColumnDefault("0")
+    private Integer buyerCount;
+    /**
+     * 券类别
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 }

@@ -1,8 +1,8 @@
-package com.abc.tjz.util.vo;
+package com.abc.tjz.util.dto;
 
 import org.springframework.data.jpa.domain.Specification;
 
-public interface CondiVO<D> {
+public interface CondiDto<D> {
 
 	Specification<D> toSpecification();
 }

@@ -12,7 +12,7 @@ import java.lang.reflect.Proxy;
  */
 public interface RepoFactory {
 
-	QuickEntryRepository getQuickEntryRepo();
+	CategoryRepository getCategoryRepo();
 	CouponTbRepository getCouponTbRepo();
 	
 	RepoFactory rf = (RepoFactory) Proxy.newProxyInstance(RepoFactory.class.getClassLoader(), new Class[] {RepoFactory.class}, new InvocationHandler() {

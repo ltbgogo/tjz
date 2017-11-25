@@ -1,4 +1,4 @@
-package com.abc.tjz.util.vo;
+package com.abc.tjz.util.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

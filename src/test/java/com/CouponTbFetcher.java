@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static com.abc.tjz.repository.RepoFactory.rf;
@@ -41,10 +42,10 @@ public class CouponTbFetcher {
 
                     CouponTb couponTb = new CouponTb();
                     couponTb.setLink(article_coupon_click_url);
-                    couponTb.setBuyPrice((int) (Float.parseFloat(article_buyFee) * 100));
-                    couponTb.setCouponPrice((int) (Float.parseFloat(article_price) * 100));
-                    couponTb.setOldPrice((int) (Float.parseFloat(article_oldPrice) * 100));
-                    couponTb.setTitle(article_title);
+                    couponTb.setBuyPrice(new BigDecimal(article_buyFee).multiply(new BigDecimal("100")).intValue());
+                    couponTb.setCouponPrice(new BigDecimal(article_price).multiply(new BigDecimal("100")).intValue());
+                    couponTb.setOldPrice(new BigDecimal(article_oldPrice).multiply(new BigDecimal("100")).intValue());
+                    couponTb.setGoodsName(article_title);
                     String imagePath = FileUtil.download(article_pic);
                     couponTb.setImagePath(imagePath);
 
