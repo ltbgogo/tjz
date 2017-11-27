@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface IdRepository<D extends IdEntity> extends JpaRepository<D, String>, JpaSpecificationExecutor<D> {
+public interface IdRepository<D extends IdEntity> extends GenericRepository<D, String>, JpaSpecificationExecutor<D> {
 
 }
 

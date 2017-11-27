@@ -31,4 +31,19 @@ public class FileUtil {
             return null;
         }
     }
+
+    public static File cache(String url) throws IOException {
+        try {
+            String filePath = url.replaceFirst("https?://", "/cache/");
+            File file = FileUtils.getFile(FileConfig.of().getBaseDir(), filePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                FileUtils.copyURLToFile(new URL(url), file);
+            }
+            return file;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return null;
+        }
+    }
 }
