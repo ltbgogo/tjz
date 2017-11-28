@@ -2,6 +2,7 @@ package com.abc.tjz.util.db.repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -31,6 +32,12 @@ public interface GenericRepository<D, ID extends Serializable> extends JpaReposi
 	<R> Page<R> findAll(CondiDto<D> condi, Pageable pageable);
 
 	<R> Page<R> findAll(CondiDto<D> condi, Pageable pageable, String...fields);
+
+	List<Map<String, Object>> nativeFindAll(String sql, Object...args);
+
+	<T> T nativeFindObject(String sql, Object... args);
+
+	int nativeUpdate(String sql, Object... args);
 }
 
 
