@@ -4,6 +4,7 @@ import com.abc.tjz.entity.CouponTakeout;
 import com.abc.tjz.module.coupon.dto.CouponTakeoutCondiDto;
 import com.abc.tjz.util.misc.SpringManager;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -24,10 +25,12 @@ public class App {
     	SpringManager.startMailApplication(App.class, args);
         CouponTakeoutCondiDto condi = new CouponTakeoutCondiDto();
 //    	rf.getCouponTakeoutRepo().findAll(condi, new PageRequest(0, 1), "id");
-        condi.getInterceptors().add((root, query, cb) -> {
-            query.select((Selection) cb.construct(CouponTakeout.class, (Selection<?>) root.get("id")));
+        condi.getSupplement().add((root, query, cb) -> {
+            //query.select((Selection) cb.construct(CouponTakeout.class, (Selection<?>) root.get("id")));
+            query.select((Selection) cb.array(root.get("id"), root.get("id")));
             return cb.and();
         });
-        rf.getCouponTakeoutRepo().findAll(condi, new PageRequest(0, 1));
+        Page<Object[]> page = rf.getCouponTakeoutRepo().findAll(condi, new PageRequest(0, 1));
+        System.out.println(page.getContent().get(0)[0]);
     }
 }

@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 public abstract class CondiDto<D> {
 
 	@Getter
-	private List<Specification<D>> interceptors = new ArrayList<>();
+	private List<Specification<D>> supplement = new ArrayList<>();
 
 	public abstract Specification<D> toSpecification();
 }

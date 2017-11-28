@@ -77,7 +77,7 @@ public class GenericRepositoryImpl<D, ID extends Serializable> extends SimpleJpa
 		Specification<D> specification = (root, query, cb) -> {
 			List<Predicate> predicates = new ArrayList<>();
 			predicates.add(condi.toSpecification().toPredicate(root, query, cb));
-			condi.getInterceptors().stream().forEach(i -> predicates.add(i.toPredicate(root, query, cb)));
+			condi.getSupplement().stream().forEach(i -> predicates.add(i.toPredicate(root, query, cb)));
 			return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 		};
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -106,7 +106,8 @@ public class GenericRepositoryImpl<D, ID extends Serializable> extends SimpleJpa
 
 	@Override
 	public <R> Page<R> findAll(CondiDto<D> condi, Pageable pageable, String... fields) {
-		condi.getInterceptors().add((root, query, cb) -> {
+		condi.getSupplement().add((root, query, cb) -> {
+			//query.select((Selection) cb.array(root.get("id"), root.get("id"))); //Page<Object[]>
 			//query.select((Selection) cb.construct(CouponTakeout.class, (Selection<?>) root.get("id")));
 			Selection[] selections = Arrays.stream(fields).map(root::get).toArray(Selection[]::new);
 			query.multiselect(selections);
