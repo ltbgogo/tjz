@@ -1,4 +1,4 @@
-package com;
+package com.coupontb;
 
 import com.abc.tjz.App;
 import com.abc.tjz.entity.CouponTb;
@@ -45,25 +45,25 @@ public class DbImporter {
                 couponTb.setImagePath(article_pic);
                 couponTb.setBuyerCount(Math.max(12652, new Random(30000).nextInt()));
                 if (file.getName().startsWith("1_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbfood"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbfood"));
                 } else if (file.getName().startsWith("2_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbtextile"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbtextile"));
                 } else if (file.getName().startsWith("3_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbappliances"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbappliances"));
                 } else if (file.getName().startsWith("4_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbwomenswear"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbwomenswear"));
                 } else if (file.getName().startsWith("5_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbbeauty"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbbeauty"));
                 } else if (file.getName().startsWith("6_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbfurniture"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbfurniture"));
                 } else if (file.getName().startsWith("7_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbbaby"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbbaby"));
                 } else if (file.getName().startsWith("8_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbacc"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbacc"));
                 } else if (file.getName().startsWith("9_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbsport"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbsport"));
                 } else if (file.getName().startsWith("10_")) {
-                    couponTb.setCategory(rf.getCategoryRepo().findOne("juantbmenswear"));
+                    couponTb.setCategory(rf.getCategoryRepo().findOne("coupontbmenswear"));
                 }
 
                 rf.getCouponTbRepo().saveAndFlush(couponTb);

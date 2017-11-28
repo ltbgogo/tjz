@@ -1,4 +1,4 @@
-package com;
+package com.coupontb;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com;
+package com.coupontb;
 
 import com.abc.tjz.App;
 import com.abc.tjz.entity.CouponTb;

@@ -52,3 +52,10 @@ $common.getURLParam = function(name, defaultValue) {
     return result ? decodeURIComponent(result[2]) : defaultValue;
 };
 
+/**
+ * 后加载项
+ */
+$(function(){
+    $.scrollUp();
+});
+

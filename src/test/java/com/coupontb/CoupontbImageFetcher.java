@@ -1,4 +1,4 @@
-package com;
+package com.coupontb;
 
 import com.abc.tjz.fs.FileUtil;
 import com.alibaba.fastjson.JSON;
