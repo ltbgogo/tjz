@@ -1,7 +1,11 @@
 package com.abc.tjz.util.db.repository;
 
+import com.abc.tjz.App;
 import com.abc.tjz.util.dto.CondiDto;
+import com.abc.tjz.util.misc.SpringManager;
 import org.apache.commons.lang3.ArrayUtils;
+import org.hibernate.SQLQuery;
+import org.hibernate.transform.Transformers;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -13,15 +17,16 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+
+import static com.abc.tjz.repository.RepoFactory.rf;
 
 @NoRepositoryBean
 public class GenericRepositoryImpl<D, ID extends Serializable> extends SimpleJpaRepository<D, ID> implements GenericRepository<D, ID> {
@@ -115,6 +120,19 @@ public class GenericRepositoryImpl<D, ID extends Serializable> extends SimpleJpa
 		});
 		return this.findAll(condi, pageable);
 	}
+
+//	public static void main( String[] args ) throws IOException {
+////		SpringApplication.run(App.class, args);
+//		SpringManager.startMailApplication(App.class, args);
+//		List<Map<String, Object>> list = rf.getCouponTakeoutRepo().execute((em, ei) -> {
+//			Query query = em.createNativeQuery("select id, image_path from t_coupon_tb");
+//			query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//			return query.<Map<String, Object>>getResultList();
+//		});
+//		for (Map map : list) {
+//			System.out.println(map.get("image_path".toUpperCase()));
+//		}
+//	}
 }
 
 
