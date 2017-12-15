@@ -15,6 +15,7 @@ spring:
     jpa:
         properties:
             hibernate:
+                #update none
                 hbm2ddl.auto: update
                 show_sql: true
                 format_sql: true
@@ -45,9 +46,9 @@ security:
         realm: ${server.context-path}
         path: /action/adm/**
     user:
-        name: admin
+        name: adm
         password: 123456
-        
+
 
 
 

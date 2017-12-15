@@ -1,0 +1,7 @@
+
+body {margin-top: 20px; margin-bottom: 70px;}
+#id_actions {
+    position: fixed; bottom: 0px; text-align: right; width: 100%; margin-left: -15px;
+    background-color: #F3F4F4; padding: 5px 15px; border-top: rgb(204, 204, 204) 1px solid;
+}
+

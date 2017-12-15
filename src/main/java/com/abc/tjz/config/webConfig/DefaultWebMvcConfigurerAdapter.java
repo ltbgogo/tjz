@@ -1,9 +1,7 @@
 package com.abc.tjz.config.webConfig;
 
 import com.abc.tjz.config.commonConfig.App;
-import com.abc.tjz.util.json.JpaLazyIntrospector;
-import com.abc.tjz.util.json.LocalDateTimeSerializer;
-import com.abc.tjz.util.json.TextEnumSerializer;
+import com.abc.tjz.util.json.*;
 import com.abc.tjz.util.spec.TextEnum;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.persistence.Tuple;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -30,7 +29,8 @@ public class DefaultWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		//配置快捷方式
-		registry.addRedirectViewController("/", "/action/coupontb/showIndex").setKeepQueryParams(true);
+		registry.addRedirectViewController("/", "/action/app/coupontb/showIndex").setKeepQueryParams(true);
+		registry.addRedirectViewController("/adm", "/action/adm/home/showIndex").setKeepQueryParams(true);
 	}
 	
 	/**
@@ -47,22 +47,8 @@ public class DefaultWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 	 */
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        SimpleModule simpleModule = new SimpleModule();
-        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
-        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
-        simpleModule.addSerializer(Date.class, new DateSerializer(false, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")));
-        simpleModule.addSerializer(TextEnum.class, new TextEnumSerializer());
-        simpleModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(simpleModule);
-        objectMapper.setAnnotationIntrospector(new JpaLazyIntrospector());
-        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        objectMapper.setSerializationInclusion(Include.NON_NULL);
-        objectMapper.setSerializationInclusion(Include.NON_EMPTY);
-        
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setObjectMapper(objectMapper);
+        converter.setObjectMapper(JsonUtil.getObjectMapper());
         converters.add(0, converter);
 	}
 }

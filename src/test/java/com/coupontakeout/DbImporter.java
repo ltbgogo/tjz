@@ -1,8 +1,8 @@
-package com.coupontakeout;
+package com.couponwm;
 
 import com.abc.tjz.App;
 import com.abc.tjz.entity.Category;
-import com.abc.tjz.entity.CouponTakeout;
+import com.abc.tjz.entity.CouponWm;
 import com.abc.tjz.fs.FileUtil;
 import com.abc.tjz.util.misc.SpringManager;
 import org.apache.commons.httpclient.HttpClient;
@@ -32,7 +32,7 @@ public class DbImporter {
     public static void main(String[] args) throws IOException, InterruptedException {
 //        setSysProxy("proxy3.bj.petrochina", "8080", "", "");
         SpringManager.startMailApplication(App.class, args);
-        for (File file : new File("F:\\tjz\\coupontakeout_fetch").listFiles()) {
+        for (File file : new File("F:\\tjz\\couponwm_fetch").listFiles()) {
             String html = FileUtils.readFileToString(file, "UTF-8");
             Document document = Jsoup.parse(html);
             for (Element li : document.getElementsByTag("body").get(0).children()) {
@@ -60,19 +60,19 @@ public class DbImporter {
                             .reduce((a, b) -> a + b);
 
                     String link = detailBodyElement.getElementsByClass("footBtn1").get(0).attr("href");
-                    Category category = rf.getCategoryRepo().findOne("coupontakeout" + FilenameUtils.getBaseName(file.getName()));
-                    CouponTakeout takeout = new CouponTakeout();
-                    takeout.setCategory(category);
-                    takeout.setCouponName(couponName);
-                    takeout.setDetailImagePath(detailImagePath);
-                    takeout.setLink(link);
-                    takeout.setPageviews(pagepreviews);
-                    takeout.setRules(rules.orElse(null));
-                    takeout.setStartTime(startTime);
-                    takeout.setSummary(summary);
-                    takeout.setThumbImagePath(thumbImagePath);
-                    takeout.setTip(tip);
-                    rf.getCouponTakeoutRepo().saveAndFlush(takeout);
+                    Category category = rf.getCategoryRepo().findOne("couponwm" + FilenameUtils.getBaseName(file.getName()));
+                    CouponWm wm = new CouponWm();
+                    wm.setCategory(category);
+                    wm.setCouponName(couponName);
+                    wm.setDetailImagePath(detailImagePath);
+                    wm.setLink(link);
+                    wm.setPageviews(pagepreviews);
+                    wm.setRules(rules.orElse(null));
+                    wm.setStartTime(startTime);
+                    wm.setSummary(summary);
+                    wm.setThumbImagePath(thumbImagePath);
+                    wm.setTip(tip);
+                    rf.getCouponWmRepo().saveAndFlush(wm);
 
 //                    TimeUnit.SECONDS.sleep(1);
                 }

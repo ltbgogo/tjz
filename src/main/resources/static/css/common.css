@@ -1,2 +1,5 @@
 * {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
 .cls_clear {clear: both;}
+.cls_hide {display: none;}
+.cls_ahide {position: absolute; top: -5000px;}
+table th {text-align: center;}

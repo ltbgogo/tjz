@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface CategoryRepository extends IdRepository<Category> {
 
-    List<Category> findByFirstOrderBySeq(String first);
 }

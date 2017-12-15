@@ -1,5 +1,6 @@
 package com.abc.tjz.util.misc;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.BeansException;
@@ -8,6 +9,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.SharedEntityManagerCreator;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -26,7 +28,11 @@ public class SpringManager implements ApplicationContextAware {
 	public static EntityManagerFactory getEntityManagerFactory() {
 		return getBean(JpaTransactionManager.class).getEntityManagerFactory();	
 	}
-	
+
+	public static EntityManager getEntityManager() {
+		return SharedEntityManagerCreator.createSharedEntityManager(SpringManager.getEntityManagerFactory());
+	}
+
 	public static <T> T getBean(Class<T> requiredType) {
 		return applicationContext.getBean(requiredType);
 	}

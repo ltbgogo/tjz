@@ -8,8 +8,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
+import java.io.IOException;
 
 public class JpaLazyIntrospector extends JacksonAnnotationIntrospector {
 
@@ -31,14 +37,6 @@ public class JpaLazyIntrospector extends JacksonAnnotationIntrospector {
 		}
 		OneToMany oneToMany = a.getAnnotation(OneToMany.class); // Default Lazy
 		if (oneToMany != null && oneToMany.fetch() != FetchType.EAGER) {
-			return true;
-		}
-		ManyToOne manyToOne = a.getAnnotation(ManyToOne.class); // Default Eager
-		if (manyToOne != null && manyToOne.fetch() == FetchType.LAZY) {
-			return true;
-		}
-		OneToOne oneToOne = a.getAnnotation(OneToOne.class); // Default Eager
-		if (oneToOne != null && oneToOne.fetch() == FetchType.LAZY) {
 			return true;
 		}
 		return super._isIgnorable(a);

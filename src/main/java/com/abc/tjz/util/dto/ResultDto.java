@@ -12,7 +12,7 @@ public class ResultDto<T> {
     public static ResultDto<Void> FAILURE = fail(null);
 
     public static <T> ResultDto<T> succeed(String msg) {
-        return of(msg, null);
+        return succeed(msg, null);
     }
 
     public static <T> ResultDto<T> succeed(String msg, T data) {

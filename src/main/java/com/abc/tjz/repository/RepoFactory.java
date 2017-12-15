@@ -1,6 +1,6 @@
 package com.abc.tjz.repository;
 
-import com.abc.tjz.entity.CouponTakeout;
+import com.abc.tjz.entity.CouponWm;
 import com.abc.tjz.entity.CouponTb;
 import com.abc.tjz.util.misc.SpringManager;
 
@@ -15,7 +15,9 @@ public interface RepoFactory {
 
 	CategoryRepository getCategoryRepo();
 	CouponTbRepository getCouponTbRepo();
-	CouponTakeoutRepository getCouponTakeoutRepo();
+	CouponWmRepository getCouponWmRepo();
+	CouponCxRepository getCouponCxRepo();
+	CouponKcRepository getCouponKcRepo();
 	
 	RepoFactory rf = (RepoFactory) Proxy.newProxyInstance(RepoFactory.class.getClassLoader(), new Class[] {RepoFactory.class}, new InvocationHandler() {
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

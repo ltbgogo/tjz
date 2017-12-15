@@ -1,0 +1,23 @@
+body {padding-bottom: 70px;}
+
+#id_header img {width: 100%; height: 180px;}
+
+#id_title {border-bottom: rgb(240, 243, 244) 4px solid; margin: 0 10px; padding-bottom: 10px;}
+#id_title p {margin: 0;}
+#id_title .cls_first {color: rgb(153, 153, 153); font-size: 14px; line-height: 16px;}
+#id_title .cls_title {color: rgb(85, 85, 85); font-size: 16px; line-height: 25px;}
+#id_title .cls_tip {color: rgb(240, 72, 72); font-size: 16px; line-height: 25px;}
+
+#id_summary {border-bottom: rgb(240, 243, 244) 4px solid; margin: 0 10px; padding: 10px 0;}
+#id_summary .cls_title {border-left: rgb(255, 0, 0) 5px solid; color: rgb(102, 102, 102); font-size: 14px; padding-left: 10px;}
+#id_summary .cls_content p {color: rgb(102, 102, 102); font-size: 14px; margin: 10px;}
+
+#id_rules {margin: 0 10px; padding: 10px 0;}
+#id_rules .cls_title {border-left: rgb(255, 0, 0) 5px solid; color: rgb(102, 102, 102); font-size: 14px; padding-left: 10px;}
+#id_rules .cls_content p {color: rgb(102, 102, 102); font-size: 14px; margin: 10px;}
+
+#id_link {border-top: 1px solid rgb(204, 204, 204); text-align: center; position: fixed; bottom: 0; width: 100%; background-color: #fff;}
+#id_link a {
+    width: 70%; display: inline-block; height: 45px; color: #fff; font-size: 16px; line-height: 45px;
+    background-color: rgb(255, 119, 0); border-radius: 25px; text-decoration: none; margin: 10px 0;
+}

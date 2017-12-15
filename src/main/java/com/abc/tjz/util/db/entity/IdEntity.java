@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 
+import com.abc.tjz.util.json.JpaEntityPropertyFilter;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @MappedSuperclass
+@JsonFilter(JpaEntityPropertyFilter.ID)
 public abstract class IdEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

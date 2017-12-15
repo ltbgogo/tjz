@@ -12,10 +12,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public abstract class CondiDto<D> {
+public interface CondiDto<D> {
 
-	@Getter
-	private List<Specification<D>> supplement = new ArrayList<>();
-
-	public abstract Specification<D> toSpecification();
+	Specification<D> toSpecification();
 }

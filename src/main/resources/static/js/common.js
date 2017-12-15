@@ -46,16 +46,15 @@ $common.getScrollHeight = function() {
 /**
  * 获取URL参数
  */
-$common.getURLParam = function(name, defaultValue) {
+$common.getUrlParam = function(name, defaultValue) {
     var regexp = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var result = window.location["search"].substr(1).match(regexp);
     return result ? decodeURIComponent(result[2]) : defaultValue;
 };
 
 /**
- * 后加载项
+ * 获取当前URL
  */
-$(function(){
-    $.scrollUp();
-});
-
+$common.generateJumpUrl = function () {
+    return  encodeURIComponent(location.pathname + location.search);
+};

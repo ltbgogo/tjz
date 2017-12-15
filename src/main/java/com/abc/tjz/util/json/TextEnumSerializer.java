@@ -19,7 +19,10 @@ public class TextEnumSerializer extends StdSerializer<TextEnum> {
 	
 	@Override
 	public void serialize(TextEnum value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-		gen.writeObject(ArrayUtils.toMap(new Object[][] {{"value", value.toString()}, {"text", value.getText()}}));
+		gen.writeStartObject();
+		gen.writeObjectField("text", value.getText());
+		gen.writeObjectField("value", value.toString());
+		gen.writeEndObject();
 	}
 }
 

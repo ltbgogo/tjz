@@ -1,0 +1,105 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    -ms-touch-action: none;
+}
+body,ul,li {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+body {
+    font-size: 12px;
+    font-family: ubuntu, helvetica, arial;
+    overflow: hidden; /* this is important to prevent the whole page to bounce */
+    overflow-y: scroll;
+    background-color: #F6F6F6;
+}
+/**
+ * 导航栏
+ */
+#id_navbar {
+    bottom: 48px;
+    height: 75px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: rgb(204, 204, 204) 1px solid;
+    background-color: #fff;
+}
+#scroller {
+    position: absolute;
+    z-index: 1;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    width: 600px;
+    height: 100%;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    text-size-adjust: none;
+}
+#scroller ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+#scroller li {
+    display: block;
+    float: left;
+    width: 65px;
+    height: 75px;
+    font-size: 10px;
+    color: rgb(51, 51, 51);
+    position: relative;
+    z-index: 9999;
+    border-bottom: rgb(204, 204, 204) 1px solid;
+}
+#scroller li.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    transform: matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0);
+    height: 10px; width: 10px; border: rgb(204, 204, 204) 1px solid;
+    left: 25px; bottom: -6px; border-width: 1px 1px 0px 0px;
+    background-color: #F6F6F6;
+}
+#scroller li img {
+    width: 40px; height: 40px; margin: 5px auto 2px auto; display: block;
+}
+/**
+ * 券列表
+ */
+#id_coupon_list {margin-top: 5px;}
+#id_coupon_list .cls_coupon {display: flex; flex-flow: row; margin: 5px; background-color: #fff;}
+#id_coupon_list .cls_coupon .cls_head {width: 75px; height: 75px; margin: 5px 0;}
+#id_coupon_list .cls_coupon .cls_head img {width: 100%; height: 100%;}
+#id_coupon_list .cls_coupon .cls_body {flex: 1; padding-left: 10px; overflow: hidden;}
+#id_coupon_list .cls_coupon .cls_body p {margin: 5px 0;}
+#id_coupon_list .cls_coupon .cls_body .cls_title {font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+#id_coupon_list .cls_coupon .cls_body .cls_tip {margin: 10px 0; color: #ff6666; font-size: 14px;}
+#id_coupon_list .cls_coupon .cls_body .cls_bottom {font-size: 16px;}
+#id_coupon_list .cls_coupon .cls_body .cls_bottom .cls_logo {width: 16px; height: 16px; margin-bottom: -2px;}
+#id_coupon_list .cls_coupon .cls_body .cls_bottom .cls_pageviews {float: right; color: #868B98; font-size: 10px; margin: 5px 10px 0px 0px;}
+
+#id_nomore {margin: 30px 0; color: #C6C6C6; font-size: 12px; text-align: center;}
+
+
+

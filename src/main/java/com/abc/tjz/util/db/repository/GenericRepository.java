@@ -7,6 +7,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import com.abc.tjz.util.dto.CondiDto;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
 import javax.persistence.criteria.Root;
 
 @NoRepositoryBean
@@ -29,15 +31,12 @@ public interface GenericRepository<D, ID extends Serializable> extends JpaReposi
 
 	<R> R execute(BiFunction<EntityManager, JpaEntityInformation<D, ID>, R> function);
 
-	<R> Page<R> findAll(CondiDto<D> condi, Pageable pageable);
+	JSONObject findJsonObject(ID id);
 
-	<R> Page<R> findAll(CondiDto<D> condi, Pageable pageable, String...fields);
-
-	List<Map<String, Object>> nativeFindAll(String sql, Object...args);
-
-	<T> T nativeFindObject(String sql, Object... args);
-
-	int nativeUpdate(String sql, Object... args);
+	/**
+	 * 必须使用query.multiselect()设置查询字段，不能是复杂类型
+	 */
+	Page<JSONObject> findJsonObjects(Specification<D> specification, Pageable pageable, String... fields);
 }
 
 

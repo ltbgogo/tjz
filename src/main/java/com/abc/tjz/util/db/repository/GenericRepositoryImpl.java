@@ -1,9 +1,16 @@
 package com.abc.tjz.util.db.repository;
 
-import com.abc.tjz.util.dto.CondiDto;
-import com.alibaba.fastjson.JSON;
-import org.hibernate.SQLQuery;
-import org.hibernate.transform.Transformers;
+import com.abc.tjz.util.db.DBUtil;
+import com.abc.tjz.util.db.ResultMapper;
+import com.abc.tjz.util.db.SimpleResultTransformer;
+import com.abc.tjz.util.db.entity.IdDateEntity;
+import com.abc.tjz.util.misc.SpringManager;
+import com.alibaba.fastjson.JSONObject;
+import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Query;
+import org.hibernate.transform.ResultTransformer;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -12,15 +19,17 @@ import org.springframework.data.jpa.repository.query.QueryUtils;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.data.querydsl.QueryDslUtils;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.persistence.criteria.*;
+import javax.swing.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 @NoRepositoryBean
 public class GenericRepositoryImpl<D, ID extends Serializable> extends SimpleJpaRepository<D, ID> implements GenericRepository<D, ID> {
@@ -62,6 +71,9 @@ public class GenericRepositoryImpl<D, ID extends Serializable> extends SimpleJpa
 		CriteriaUpdate<D> query = cb.createCriteriaUpdate(ei.getJavaType());
 		Root<D> root = query.from(ei.getJavaType());
 		query.set(root.get(fieldName), newFieldValue);
+		if (IdDateEntity.class.isAssignableFrom(ei.getJavaType())) {
+			query.set(root.get("updateDateTime"), LocalDateTime.now());
+		}
 		query.where(root.get(ei.getIdAttribute()).in((Collection<ID>) ids));
 		return em.createQuery(query).executeUpdate();
 	}
@@ -72,13 +84,21 @@ public class GenericRepositoryImpl<D, ID extends Serializable> extends SimpleJpa
 	}
 
 	@Override
-	public <R> Page<R> findAll(CondiDto<D> condi, Pageable pageable) {
-		Specification<D> specification = (root, query, cb) -> {
-			List<Predicate> predicates = new ArrayList<>();
-			predicates.add(condi.toSpecification().toPredicate(root, query, cb));
-			condi.getSupplement().stream().forEach(i -> predicates.add(i.toPredicate(root, query, cb)));
-			return cb.and(predicates.toArray(new Predicate[predicates.size()]));
-		};
+	public JSONObject findJsonObject(ID id) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<?> query = cb.createTupleQuery();
+		Root<D> root = query.from(ei.getJavaType());
+		query.where(cb.equal(root.get(ei.getIdAttribute().getName()), id));
+		query.multiselect(DBUtil.getSelections(root, ei.getJavaType(), true));
+		TypedQuery<?> typedQuery = em.createQuery(query);
+		final String[] realAliases = query.getSelection().getCompoundSelectionItems().stream().map(Selection::getAlias).toArray(String[]::new);
+		typedQuery.unwrap(Query.class).setResultTransformer(new SimpleResultTransformer(ResultMapper.ofFastJson(realAliases)));
+		return (JSONObject) typedQuery.getSingleResult();
+	}
+
+	@Override
+	public Page<JSONObject> findJsonObjects(Specification<D> specification, Pageable pageable, String... fields) {
+		specification = specification == null ? (r, q, c) -> c.conjunction() : specification;
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		long total = 0;
 		{
@@ -86,62 +106,38 @@ public class GenericRepositoryImpl<D, ID extends Serializable> extends SimpleJpa
 			total = query.getSingleResult();
 		}
 		if (total <= pageable.getOffset()) {
-			return new PageImpl<R>(new ArrayList<R>(), pageable, total);
+			return new PageImpl<>(new ArrayList<JSONObject>(), pageable, total);
 		} else {
-			CriteriaQuery<D> query = cb.createQuery(ei.getJavaType());
+			CriteriaQuery<?> query = cb.createTupleQuery();
 			Root<D> root = query.from(ei.getJavaType());
-			Predicate p = specification.toPredicate(root, query, cb);
-			query.where(p);
+			query.where(specification.toPredicate(root, query, cb));
+			List<Selection<?>> selections = query.getSelection() == null ? new ArrayList<>() : new ArrayList<>(query.getSelection().getCompoundSelectionItems());
+			selections.addAll(Arrays.stream(fields).map(f -> {
+				Path<?> path = root;
+				String alias = "";
+				for (String sf : f.split("\\.")) {
+					path = path.get(sf);
+					alias += StringUtils.capitalize(sf);
+				}
+				path.alias(StringUtils.uncapitalize(alias));
+				return path;
+			}).collect(Collectors.toList()));
+			if (selections.isEmpty()) {
+				selections.addAll(DBUtil.getSelections(root, ei.getJavaType(), false));
+			}
+			query.multiselect(selections);
+			SpringManager.getEntityManagerFactory().getProperties();
 			//设置排序
 			query.orderBy(QueryUtils.toOrders(pageable.getSort(), root, cb));
 			//设置分页
-			TypedQuery<D> createQuery = em.createQuery(query);
-			createQuery.setFirstResult(pageable.getOffset());
-			createQuery.setMaxResults(pageable.getPageSize());
+			TypedQuery<?> typedQuery = em.createQuery(query);
+			typedQuery.setFirstResult(pageable.getOffset());
+			typedQuery.setMaxResults(pageable.getPageSize());
+			final String[] realAliases = query.getSelection().getCompoundSelectionItems().stream().map(Selection::getAlias).toArray(String[]::new);
+			typedQuery.unwrap(Query.class).setResultTransformer(new SimpleResultTransformer(ResultMapper.ofFastJson(realAliases)));
 			//查询
-			return new PageImpl<R>((List<R>) createQuery.getResultList(), pageable, total);
+			return new PageImpl<JSONObject>((List<JSONObject>) typedQuery.getResultList(), pageable, total);
 		}
-	}
-
-	@Override
-	public <R> Page<R> findAll(CondiDto<D> condi, Pageable pageable, String... fields) {
-		condi.getSupplement().add((root, query, cb) -> {
-			//query.select((Selection) cb.array(root.get("id"), root.get("id"))); //Page<Object[]>
-			//query.select((Selection) cb.construct(CouponTakeout.class, (Selection<?>) root.get("id")));
-			Selection[] selections = Arrays.stream(fields).map(root::get).toArray(Selection[]::new);
-			query.multiselect(selections);
-			return cb.and();
-		});
-		return this.findAll(condi, pageable);
-	}
-
-	@Override
-	public List<Map<String, Object>> nativeFindAll(String sql, Object... args) {
-		Query query = em.createNativeQuery(sql);
-		for (int i = 0; i < args.length; i++) {
-			query.setParameter(i + 1, args[i]);
-		}
-		query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-		return query.<Map<String, Object>>getResultList();
-	}
-
-	@Override
-	public <T> T nativeFindObject(String sql, Object... args) {
-		Query query = em.createNativeQuery(sql);
-		for (int i = 0; i < args.length; i++) {
-			query.setParameter(i + 1, args[i]);
-		}
-		//单字段是对象，多字段是对象数组
-		return (T) query.getSingleResult();
-	}
-
-	@Override
-	public int nativeUpdate(String sql, Object... args) {
-		Query query = em.createNativeQuery(sql);
-		for (int i = 0; i < args.length; i++) {
-			query.setParameter(i + 1, args[i]);
-		}
-		return query.executeUpdate();
 	}
 }
 

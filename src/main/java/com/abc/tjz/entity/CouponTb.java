@@ -9,6 +9,8 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 
 /**
+ * 淘宝券
+ *
  * @author LiuTongbin
  * @date 2017/11/19 0019 22:51
  */
@@ -61,4 +63,10 @@ public class CouponTb extends IdDateEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
+    /**
+     * 是否删除
+     */
+    @Column(name = "is_deleted")
+    @ColumnDefault("false")
+    private Boolean isDeleted;
 }
