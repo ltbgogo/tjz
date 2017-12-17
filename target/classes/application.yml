@@ -7,7 +7,7 @@ spring:
         settings.web-allow-others: true
     datasource:
         driverClassName: org.h2.Driver
-        url: jdbc:h2:tcp://localhost:9092/F:/tjz/tjz;MODE=MYSQL
+        url: jdbc:h2:tcp://localhost:9092/d:/db/h2/tjz;MODE=MYSQL
         #url: jdbc:h2:mem:akkb;MODE=MYSQL
         username: test
         password: test
@@ -15,7 +15,8 @@ spring:
     jpa:
         properties:
             hibernate:
-                hbm2ddl.auto: update
+                #update none
+                hbm2ddl.auto: none
                 show_sql: true
                 format_sql: true
     devtools.restart.enabled: false
@@ -45,9 +46,9 @@ security:
         realm: ${server.context-path}
         path: /action/adm/**
     user:
-        name: admin
+        name: adm
         password: 123456
-        
+
 
 
 

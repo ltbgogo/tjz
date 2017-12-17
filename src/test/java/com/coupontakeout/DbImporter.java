@@ -1,4 +1,4 @@
-package com.couponwm;
+package com.coupontakeout;
 
 import com.abc.tjz.App;
 import com.abc.tjz.entity.Category;
