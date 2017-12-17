@@ -46,8 +46,8 @@ security:
         realm: ${server.context-path}
         path: /action/adm/**
     user:
-        name: adm
-        password: 123456
+        name: xxx
+        password: xxx
 
 
 
