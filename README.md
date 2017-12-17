@@ -13,14 +13,27 @@ java -cp D:\repository\com\h2database\h2\1.4.196\h2-1.4.196.jar org.h2.tools.Run
 ##查看帮助
 mvn spring-boot:help -Dgoal=run -Ddetail=true
 
-##运行
-mvn spring-boot:run -Drun.arguments=\
---server.port=8080\
+##运行tjz.8080.sh
+```
+#!/bin/sh
+#project's name
+pname=`basename ${0%.sh} | cut -d. -f1`
+
+#project's port
+pport=`basename ${0%.sh} | cut -d. -f2`
+
+#change to workspace
+cd ${pname}
+
+#run
+mvn spring-boot:run \
+-Drun.arguments=\
+--server.port=${pport}\
 ,--spring.datasource.driverClassName=com.mysql.jdbc.Driver\
 ,--spring.datasource.url=jdbc:mysql://127.0.0.1:3306/tjz?zeroDateTimeBehavior=convertToNull\
 ,--spring.datasource.username=tjz\
 ,--spring.datasource.password=123
-
+```
 
 
 
