@@ -31,7 +31,7 @@ $(function () {
      */
     var clipboard = new Clipboard('#id_copy', {
         target: function () {
-            return $('#id_copy .cls_wrapper').get(0);
+            return $('#id_taoPassword_area .cls_taoPassword_text').get(0);
         }
     });
     clipboard.on('success', function (e) {
