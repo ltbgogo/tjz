@@ -6,8 +6,8 @@
 <div id="id_navbar">
     <div id="scroller">
         <ul>
-            <li v-for="(entry,index) in quickEntries" v-bind:class="{active: currentEntry == entry}" v-on:click="showIndex(entry);">
-                <img
+            <li v-for="(entry,index) in quickEntries" v-bind:class="{active: currentEntry == entry}">
+                <img v-on:click="showIndex(entry);" v-on:touch="showIndex(entry);"
                         v-bind:src="'${app.dynamicResPath}/couponcx/entry/' + entry.id.replace('couponcx', '') + '.png'">
                 <span class="cls_text">{{entry.name}}</span>
             </li>
