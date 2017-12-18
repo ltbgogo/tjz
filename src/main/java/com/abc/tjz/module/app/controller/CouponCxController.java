@@ -48,7 +48,7 @@ public class CouponCxController extends AbstractController {
     @GetMapping("/getDetail")
     public ResultDto<ModelMap> getDetail(String couponId, ModelMap map) {
         CouponCx coupon = rf.getCouponCxRepo().findOne(couponId);
-        map.addAttribute("app", coupon);
+        map.addAttribute("coupon", coupon);
         map.addAttribute("category", coupon.getCategory());
         return ResultDto.succeed("", map);
     }

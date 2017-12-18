@@ -49,7 +49,7 @@ public class CouponWmController extends AbstractController {
     @GetMapping("/getDetail")
     public ResultDto<ModelMap> getDetail(String couponId, ModelMap map) {
         CouponWm coupon = rf.getCouponWmRepo().findOne(couponId);
-        map.addAttribute("app", coupon);
+        map.addAttribute("coupon", coupon);
         map.addAttribute("category", coupon.getCategory());
         return ResultDto.succeed("", map);
     }
