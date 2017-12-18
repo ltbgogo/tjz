@@ -3,7 +3,7 @@
 
 <!-- 商品图片 -->
 <div id="id_header">
-    <img v-bind:src="coupon.detailImagePath" onerror='this.src="//img.alicdn.com/tps/i3/T1OjaVFl4dXXa.JOZB-114-114.png" />
+    <img v-bind:src="coupon.detailImagePath" onerror='this.src="//img.alicdn.com/tps/i3/T1OjaVFl4dXXa.JOZB-114-114.png"' />
 </div>
 
 <!-- 商品标题 -->
